@@ -1,0 +1,1 @@
+components.layout<?php /**PATH C:\xampp\htdocs\hms\storage\framework\views/74e44b5b159d28fe693f9ad69e1e4859.blade.php ENDPATH**/ ?>

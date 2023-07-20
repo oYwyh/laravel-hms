@@ -1,0 +1,1 @@
+components.panel<?php /**PATH C:\xampp\htdocs\hms\storage\framework\views/3ce11fbc08e2703b68071cd1e924dca6.blade.php ENDPATH**/ ?>

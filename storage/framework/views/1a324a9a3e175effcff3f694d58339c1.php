@@ -1,0 +1,1 @@
+<SpladeScript :script="<?php echo \Illuminate\Support\Js::from((string) $slot)->toHtml() ?>" /><?php /**PATH C:\xampp\htdocs\hms\vendor\protonemedia\laravel-splade\src/../resources/views/functional/script.blade.php ENDPATH**/ ?>

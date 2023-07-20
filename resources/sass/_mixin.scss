@@ -1,0 +1,15 @@
+@mixin row {
+    display: flex;
+    flex-direction: row;
+}
+@mixin column {
+    display: flex;
+    flex-direction: column;
+}
+@mixin space-between {
+    display: flex;
+    justify-content: space-between;
+}
+@mixin rounded {
+    border-radius: 50%;
+}

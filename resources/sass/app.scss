@@ -1,0 +1,243 @@
+// Fonts
+@import url('https://fonts.bunny.net/css?family=Nunito');
+
+// Variables
+@import '_variables';
+// Mixins
+@import '_mixin';
+
+// Bootstrap
+// @import 'bootstrap/scss/bootstrap';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+Link {
+    text-decoration: none;
+}
+
+.divider {
+    border: 1px solid $border;
+    height: 80%;
+}
+.divider-primary {
+    border: 1px solid $border;
+    margin-top: 1rem;
+}
+
+// Start Header
+.header {
+
+    position: relative;
+    .wrapper {
+        @include space-between;
+        flex-direction: row;
+        padding: 0.5rem 2rem;
+        border-bottom: 1px solid $border;
+        .logo {
+            font-size: 35px;
+            font-weight: bolder;
+            color: $primary;
+            span {
+                color: black;
+            }
+        }
+        .icons {
+            @include row;
+            align-items: center;
+            gap: 1rem;
+            .dropdown {
+                position: relative;
+                display: inline-block;
+                .profile-pic {
+                    @include rounded;
+                    cursor: pointer;
+                    max-width: fit-content;
+                    border: 2px solid $primary;
+                    padding: 2px;
+                    img {
+                        @include rounded;
+                        max-width: 100%;
+                        width: 50px;
+                    }
+                }
+                .dropdown-content {
+                    background-color: white;
+                    // display: none;
+                    position: absolute;
+                    right: 1px;
+                    width: fit-content;
+                    overflow: auto;
+                    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                    z-index: 1;
+                    margin-top: 1rem;
+                    line-height: 2;
+                    transition: $transition;
+                    &.show {
+                        @include column;
+                    }
+                    .box {
+                        @include row;
+                        align-items: center;
+                        gap: 1rem;
+                        width: fit-content;
+                        min-width: 200px;
+                        height: fit-content;
+                        padding: 0.5rem 1rem;
+                        .img {
+                            @include rounded;
+                            cursor: pointer;
+                            max-width: fit-content;
+                            border: 2px solid $primary;
+                            padding: 2px;
+                            img {
+                                @include rounded;
+                                max-width: 100%;
+                                width: 50px;
+                                min-width: 50px;
+                            }
+                        }
+                    }
+                    #form {
+                        transition: $transition;
+                        &:hover {
+                            background-color: #f5f5f5;
+                        }
+                    }
+                }
+                #dropdown-bell-content {
+                    right: 20px;
+                }
+                .bell {
+                    cursor: pointer;
+                    i {
+                        padding: 0.8rem 1rem;
+                        background-color: #f7eccb;
+                        color: #f9d053;
+                        font-size: 18px;
+                        font-weight: bold;
+                        border-radius: 8px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Main
+// display: grid;
+// grid-template-areas:
+// "sidebar content content";
+.main {
+    @include row;
+    gap: 1rem;
+    .sidebar {
+        padding: 1rem 0;
+        .title {
+            padding: 0.5rem 1rem;
+            font-size: 14px;
+            color: rgb(209, 209, 209);
+        }
+        ul {
+            padding: 1rem 2rem;
+            @include column;
+            gap: 1rem;
+            padding-top: 0.5rem;
+            li {
+                @include row;
+                align-items: center;
+                width: fit-content;
+                gap: 0.5rem;
+                .Link {
+                    @include row;
+                    align-items: center;
+                    transition: $transition;
+                    padding: 3px 1rem;
+                    border-radius: 8px;
+                    gap: 0.5rem;
+                    @media (max-width:767px) {
+                            padding: 5px 1rem;
+                            span {
+                                display: none;
+                            }
+                    }
+                    &.active {
+                        color: white;
+                        background-color: $primary;
+                    }
+                    &:hover {
+                        color: white;
+                        background-color: $primary;
+                        gap: 1rem;
+                    }
+                }
+            }
+        }
+    }
+    .content {
+        @include column;
+        gap: 1.5rem;
+        width: 100%;
+        padding: 1rem 2rem;
+        .box {
+            @include space-between;
+            align-items: center;
+            @media (max-width:767px) {
+                @include column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+            .title {
+                font-size: 25px;
+            }
+            #date {
+                width: 300px !important;
+            }
+        }
+        .overview {
+            @include row;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            @media (max-width:767px) {
+                justify-content: flex-start;
+            }
+            .box {
+                @include column;
+                align-items: flex-start;
+                background-color: #ebeef8;
+                width: 250px;
+                padding: 0.5rem 1rem;
+                border-radius: 8px;
+                gap: 0.5rem;
+                .title {
+                    font-size: 16px;
+                    color: #4a69d8;
+                    i {
+                        padding-left: 1rem
+                    }
+                }
+                .row {
+                    @include space-between;
+                    align-items: center;
+                    flex-direction: row;
+                    width: 100%;
+                    .total {
+                        font-size: 22px;
+                        font-weight: bolder;
+                    }
+                    .something {
+                        font-size: 22px;
+                    }
+                }
+            }
+        }
+    }
+}
