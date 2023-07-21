@@ -54,9 +54,34 @@ Route::middleware(['splade'])->group(function () {
         Route::middleware(['auth:admin','PreventBackHistory'])->group(function(){
             Route::get('/home',[AdminController::class,'home'])->name('home');
             Route::post('/logout',[AdminController::class,'logout'])->name('logout');
-            Route::get('/admins',[AdminController::class,'admins'])->name('admins');
             Route::get('/doctors',[AdminController::class,'doctors'])->name('doctors');
             Route::get('/patients',[AdminController::class,'patients'])->name('patients');
+            Route::prefix('manage')->name('manage.')->group(function() {
+                Route::prefix('admins')->name('admins.')->group(function() {
+                    Route::get('/index',[AdminController::class,'adminIndex'])->name('index');
+                    Route::post('/delete',[AdminController::class,'adminDelete'])->name('delete');
+                    Route::post('/update',[AdminController::class,'adminUpdate'])->name('update');
+                    Route::get('/edit',[AdminController::class,'adminEdit'])->name('edit');
+                    Route::get('/add',[AdminController::class,'adminAdd'])->name('add');
+                    Route::post('/create',[AdminController::class,'adminCreate'])->name('create');
+                });
+                Route::prefix('doctors')->name('doctors.')->group(function() {
+                    Route::get('/index',[AdminController::class,'doctorIndex'])->name('index');
+                    Route::post('/delete',[AdminController::class,'doctorDelete'])->name('delete');
+                    Route::post('/update',[AdminController::class,'doctorUpdate'])->name('update');
+                    Route::get('/edit',[AdminController::class,'doctorEdit'])->name('edit');
+                    Route::get('/add',[AdminController::class,'doctorAdd'])->name('add');
+                    Route::post('/create',[AdminController::class,'doctorCreate'])->name('create');
+                });
+                Route::prefix('users')->name('users.')->group(function() {
+                    Route::get('/index',[AdminController::class,'userIndex'])->name('index');
+                    Route::post('/delete',[AdminController::class,'userDelete'])->name('delete');
+                    Route::post('/update',[AdminController::class,'userUpdate'])->name('update');
+                    Route::get('/edit',[AdminController::class,'userEdit'])->name('edit');
+                    Route::get('/add',[AdminController::class,'userAdd'])->name('add');
+                    Route::post('/create',[AdminController::class,'userCreate'])->name('create');
+                });
+            });
             // Route::post('/profile',[AdminController::class,'profile'])->name('logout');
         });
     });

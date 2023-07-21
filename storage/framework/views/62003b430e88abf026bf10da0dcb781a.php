@@ -30,7 +30,7 @@
                                         <img src="<?php echo e(asset('images/doc.jpg')); ?>" alt="">
                                     </div>
                                     <div class="msg">
-                                        Les go
+                                        ez
                                     </div>
                                 </div>
                                 <div class="divider-primary"></div>
@@ -39,7 +39,7 @@
                                         <img src="<?php echo e(asset('images/doc.jpg')); ?>" alt="">
                                     </div>
                                     <div class="msg">
-                                        Les go
+                                        ez
                                     </div>
                                 </div>
                                 <div class="divider-primary"></div>
@@ -48,7 +48,7 @@
                                         <img src="<?php echo e(asset('images/doc.jpg')); ?>" alt="">
                                     </div>
                                     <div class="msg">
-                                        Les go
+                                        ez
                                     </div>
                                 </div>
                                 <div class="divider-primary"></div>
@@ -57,7 +57,7 @@
                                         <img src="<?php echo e(asset('images/doc.jpg')); ?>" alt="">
                                     </div>
                                     <div class="msg">
-                                        Les go
+                                        ez
                                     </div>
                                 </div>
                         </div>

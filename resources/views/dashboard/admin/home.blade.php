@@ -2,7 +2,7 @@
     <x-admin.content>
         <div class="box">
             <div class="title">Overview</div>
-            <x-splade-form :action="route('admin.admins')">
+            <x-splade-form :action="route('admin.manage.admins.index')">
                 <x-splade-input id="date" name="time" placeholder="Time" date />
             </x-splade-form>
         </div>
@@ -29,5 +29,32 @@
                 </div>
             </div>
         </div>
+        <div class="charts">
+            <canvas id="myChart"></canvas>
+        </div>
     </x-admin.content>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('myChart');
+
+        new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            datasets: [{
+              label: '# of Votes',
+              data: [12, 19, 3, 5, 2, 3],
+              borderWidth: 1
+            }]
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true
+              }
+            }
+          }
+        });
+      </script>
+
 </x-admin.layout>

@@ -14,7 +14,7 @@
                                         <img src="{{asset('images/doc.jpg')}}" alt="">
                                     </div>
                                     <div class="msg">
-                                        Les go
+                                        ez
                                     </div>
                                 </div>
                                 <div class="divider-primary"></div>
@@ -23,7 +23,7 @@
                                         <img src="{{asset('images/doc.jpg')}}" alt="">
                                     </div>
                                     <div class="msg">
-                                        Les go
+                                        ez
                                     </div>
                                 </div>
                                 <div class="divider-primary"></div>
@@ -32,7 +32,7 @@
                                         <img src="{{asset('images/doc.jpg')}}" alt="">
                                     </div>
                                     <div class="msg">
-                                        Les go
+                                        ez
                                     </div>
                                 </div>
                                 <div class="divider-primary"></div>
@@ -41,7 +41,7 @@
                                         <img src="{{asset('images/doc.jpg')}}" alt="">
                                     </div>
                                     <div class="msg">
-                                        Les go
+                                        ez
                                     </div>
                                 </div>
                         </div>

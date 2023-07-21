@@ -239,5 +239,23 @@ Link {
                 }
             }
         }
+        .title {
+            font-size: 35px;
+
+        }
+        .add {
+            background-color: #5446ff;
+            font-weight: bolder;
+            font-size: 18px;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            color: white;
+            width:fit-content;
+            transition: $transition;
+            &:hover {
+                background-color: #4338ca;
+            }
+        }
     }
+
 }
