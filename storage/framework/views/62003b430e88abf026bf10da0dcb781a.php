@@ -107,7 +107,7 @@
 <?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag && $constructor = (new ReflectionClass(ProtoneMedia\Splade\Components\Form::class))->getConstructor()): ?>
 <?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
 <?php endif; ?>
-<?php $component->withAttributes(['id' => 'form','confirm' => true,'action' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute(Route('admin.logout'))]); ?>
+<?php $component->withAttributes(['id' => 'form','action' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute(Route('admin.profile.index'))]); ?>
                                 <?php if (isset($component)) { $__componentOriginal2d975ce603f483bebe2dbee59a477e99 = $component; } ?>
 <?php $component = ProtoneMedia\Splade\Components\Form\Submit::resolve([] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
 <?php $component->withName('splade-submit'); ?>

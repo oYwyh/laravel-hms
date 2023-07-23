@@ -57,7 +57,7 @@
                     </div>
                     <x-splade-transition show="toggled">
                         <div id="dropdown-profile-content" class="dropdown-content">
-                            <x-splade-form id="form" confirm :action="Route('admin.logout')">
+                            <x-splade-form id="form" :action="Route('admin.profile.index')">
                                 <x-splade-submit style="background: none; color:black !important; border:none !important;">{{Auth::guard('admin')->user()->name}}</x-splade-submit>
                             </x-splade-form>
                             <x-splade-form

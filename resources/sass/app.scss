@@ -241,7 +241,6 @@ Link {
         }
         .title {
             font-size: 35px;
-
         }
         .add {
             background-color: #5446ff;
@@ -254,6 +253,100 @@ Link {
             transition: $transition;
             &:hover {
                 background-color: #4338ca;
+            }
+        }
+        .profile {
+            @include column;
+            gap: 0rem;
+            width: 100%;
+            .box {
+                @include row;
+                align-items: flex-start;
+                justify-content: flex-start;
+                padding: 1rem;
+                width: 100%;
+                gap: 3rem;
+                .box {
+                    @include rounded;
+                    width: fit-content !important;
+                    border: 2px solid $primary;
+                    padding: 2px;
+                    img {
+                        @include rounded;
+                        max-width: 100%;
+                        width: 100px;
+                    }
+                }
+                #info {
+                    width: 100%;
+                    .group {
+                        @include row;
+                        gap: 3rem;
+                        margin-top: 2rem;
+                        &:nth-child(1) {
+                            margin: 0;
+                        }
+                        .input {
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+        }
+        .chart {
+            width: 500px;
+            display: flex;
+            @include column;
+            align-items: flex-end;
+            .options {
+                display: flex;
+                justify-content: flex-end;
+                ul.user {
+                    @include row;
+                    li {
+                        font-size:14px ;
+                        background-color: $border;
+                        padding: 2px 8px;
+                        cursor: pointer;
+                        border-top-left-radius: 8PX;
+                        border-top-right-radius: 8PX;
+                    }
+                }
+                ul.lol {
+                    opacity: 0;
+                    z-index: -100;
+                    li {
+                        font-size:14px ;
+                        background-color: $border;
+                        padding: 2px 8px;
+                        cursor: pointer;
+                        border-top-right-radius: 8PX;
+                        border-bottom-right-radius: 8PX;
+                    }
+                }
+            }
+            .row {
+                display: flex;
+                flex-direction: row-reverse;
+                align-items: center;
+                ul.type{
+                    @include column;
+                    gap: 0.5rem;
+                    li {
+                        font-size:14px ;
+                        background-color: $border;
+                        padding: 2px 8px;
+                        cursor: pointer;
+                        border-top-right-radius: 8PX;
+                        border-bottom-right-radius: 8PX;
+                    }
+                }
+                canvas {
+                    border: 2px solid $border;
+                    width: 500px;
+                    border-radius: 8px;
+                    border-top-right-radius: 0px;
+                }
             }
         }
     }

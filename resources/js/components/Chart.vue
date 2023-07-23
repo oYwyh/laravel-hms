@@ -1,0 +1,72 @@
+<script setup></script>
+<template>
+    <aside>
+        <Line
+            class="active"
+          id="my-chart-id"
+          :options="chartOptions"
+          :data="chartData"
+        />
+        <!-- <Bar
+          class="active"
+          id="my-chart-id"
+          :options="chartOptions"
+          :data="chartData"
+          />
+          <Pie
+          class="active"
+          id="my-chart-id"
+          :options="chartOptions"
+          :data="chartData"
+        /> -->
+    </aside>
+  </template>
+  <script>
+
+import { Line } from 'vue-chartjs';
+import { Bar } from 'vue-chartjs'
+import { Pie } from 'vue-chartjs'
+
+import { Chart as ChartJS, CategoryScale,BarElement,ArcElement ,LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js'
+
+  ChartJS.register(  CategoryScale,LinearScale,PointElement,BarElement,ArcElement,LineElement,Title,Tooltip,Legend)
+
+  window.onload = () => {
+    localStorage.setItem('type', JSON.stringify(Line))
+    localStorage.setItem('name', 'LineChart')
+    localStorage.setItem('label', 'Users')
+  }
+
+  export default {
+    props: ['label','datas'],
+    name: localStorage.getItem('name'),
+    components: { Line } ,
+    data() {
+      return {
+        chartData: {
+          labels: (this.label).split(','),
+          datasets: [
+                {
+                    label: localStorage.getItem('label'),
+                    backgroundColor: 'blue',
+                    data: (this.datas).split(','),
+                }
+            ]
+        },
+        chartOptions: {
+          responsive: true
+        }
+      }
+    },
+    mounted() {
+        // window.axios.get('/api/chart').then(res => {
+        //     let response = res.data
+        //     window.label = response.labels;
+        //     window.datas = response.data;
+        //     console.log(label);
+        // })
+    }
+  }
+
+
+  </script>

@@ -14,6 +14,7 @@ use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use LaravelDaily\LaravelCharts\Classes\LaravelChart;
 use ProtoneMedia\Splade\Facades\Toast;
 
 class AdminController extends Controller
@@ -42,28 +43,30 @@ class AdminController extends Controller
         ->autoDismiss(5);
         return redirect()->back();
     }
-
     public function home() {
         $users = DB::table('users')->get();
         $admins = DB::table('admins')->get();
         $doctors = DB::table('doctors')->get();
-        // $data = DB::table('users')->select('id','created_at')->get()->groupBy(function($data) {
-        //     return Carbon::parse($data->created_at)->format('M');
-        // });
-        // $months=[];
-        // $monthCount=[];
-        // foreach ($data as $month => $items) {
-        //     $months[]=$month;
-        //     $monthCount[]=count($items);
-        // }
-        return view('dashboard.admin.home',[
-            'users'=>$users,
-            'admins'=>$admins,
-            'doctors'=>$doctors,
-            // 'chart'=>$data,
-            // 'months'=>$months,
-            // 'monthCount'=>$monthCount,
-        ]);
+        // $datas = User::select(DB::raw("COUNT(*) as count"), DB::raw("DAYNAME(created_at) as day_name"))
+        //             ->whereYear('created_at', date('Y'))
+        //             ->groupBy(DB::raw("day_name"))
+        //             ->orderBy('created_at')
+        //             ->pluck('count', 'day_name');
+
+        // $labels = $datas->keys()->toArray();
+        // $data = $datas->values()->toArray();
+        // return view('dashboard.admin.home', compact('users','admins','doctors','labels', 'data'));
+        $chart_options = [
+            'chart_title' => 'Users by months',
+            'report_type' => 'group_by_date',
+            'model' => 'App\Models\User',
+            'group_by_field' => 'created_at',
+            'group_by_period' => 'month',
+            'chart_type' => 'bar',
+        ];
+        $chart1 = new LaravelChart($chart_options);
+
+        return view('dashboard.admin.home', compact('users','admins','doctors','chart1'));
     }
     public function adminIndex() {
         return view('dashboard.admin.manage.admins.index',[
@@ -238,5 +241,12 @@ class AdminController extends Controller
         User::find($req->id)->delete();
         Toast::success('User Removed Successfuly!');
         return redirect()->back();
+    }
+    public function profile(Admin $admin) {
+        return view('dashboard.admin.profile.index',
+        [
+            'admin'=>Auth::user(),
+        ]
+    );
     }
 }

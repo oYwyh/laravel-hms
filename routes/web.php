@@ -52,13 +52,14 @@ Route::middleware(['splade'])->group(function () {
             Route::post('/check',[AdminController::class,'check'])->name('check');
         });
         Route::middleware(['auth:admin','PreventBackHistory'])->group(function(){
+            Route::get('/chart',[AdminController::class,'chart'])->name('chart');
             Route::get('/home',[AdminController::class,'home'])->name('home');
             Route::post('/logout',[AdminController::class,'logout'])->name('logout');
             Route::get('/doctors',[AdminController::class,'doctors'])->name('doctors');
             Route::get('/patients',[AdminController::class,'patients'])->name('patients');
             Route::prefix('manage')->name('manage.')->group(function() {
                 Route::prefix('admins')->name('admins.')->group(function() {
-                    Route::get('/index',[AdminController::class,'adminIndex'])->name('index');
+                    Route::get('/',[AdminController::class,'adminIndex'])->name('index');
                     Route::post('/delete',[AdminController::class,'adminDelete'])->name('delete');
                     Route::post('/update',[AdminController::class,'adminUpdate'])->name('update');
                     Route::get('/edit',[AdminController::class,'adminEdit'])->name('edit');
@@ -66,7 +67,7 @@ Route::middleware(['splade'])->group(function () {
                     Route::post('/create',[AdminController::class,'adminCreate'])->name('create');
                 });
                 Route::prefix('doctors')->name('doctors.')->group(function() {
-                    Route::get('/index',[AdminController::class,'doctorIndex'])->name('index');
+                    Route::get('/',[AdminController::class,'doctorIndex'])->name('index');
                     Route::post('/delete',[AdminController::class,'doctorDelete'])->name('delete');
                     Route::post('/update',[AdminController::class,'doctorUpdate'])->name('update');
                     Route::get('/edit',[AdminController::class,'doctorEdit'])->name('edit');
@@ -74,13 +75,16 @@ Route::middleware(['splade'])->group(function () {
                     Route::post('/create',[AdminController::class,'doctorCreate'])->name('create');
                 });
                 Route::prefix('users')->name('users.')->group(function() {
-                    Route::get('/index',[AdminController::class,'userIndex'])->name('index');
+                    Route::get('/',[AdminController::class,'userIndex'])->name('index');
                     Route::post('/delete',[AdminController::class,'userDelete'])->name('delete');
                     Route::post('/update',[AdminController::class,'userUpdate'])->name('update');
                     Route::get('/edit',[AdminController::class,'userEdit'])->name('edit');
                     Route::get('/add',[AdminController::class,'userAdd'])->name('add');
                     Route::post('/create',[AdminController::class,'userCreate'])->name('create');
                 });
+            });
+            Route::prefix('profile')->name('profile.')->group(function() {
+                Route::get('/',[AdminController::class,'profile'])->name('index');
             });
             // Route::post('/profile',[AdminController::class,'profile'])->name('logout');
         });
@@ -99,3 +103,4 @@ Route::middleware(['splade'])->group(function () {
         });
     });
 });
+Route::get('chart',[AdminController::class, 'chart']);

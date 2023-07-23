@@ -29,32 +29,44 @@
                 </div>
             </div>
         </div>
-        <div class="charts">
-            <canvas id="myChart"></canvas>
-        </div>
+        {{-- <div class="chart">
+            <div class="options">
+                <ul class="user">
+                    <li id="user">Users</li>
+                    <li id="admin">Admins</li>
+                    <li id="doctor">Doctors</li>
+                    <li id="appointment">Appointment</li>
+                </ul>
+                <ul class="lol">
+                    <li>lol</li>
+                </ul>
+            </div>
+            <div class="row">
+                <ul class="type">
+                    <li>Bar</li>
+                    <li>Line</li>
+                    <li>pie</li>
+                </ul>
+                <chart label="{{implode(',',$labels)}}" datas="{{implode(',',$data)}}"/>
+            </div>
+        </div> --}}
+        <h1>{{ $chart1->options['chart_title'] }}</h1>
+        {!! $chart1->renderHtml() !!}
     </x-admin.content>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        const ctx = document.getElementById('myChart');
+    {{-- <x-splade-script>
 
-        new Chart(ctx, {
-          type: 'bar',
-          data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-            datasets: [{
-              label: '# of Votes',
-              data: [12, 19, 3, 5, 2, 3],
-              borderWidth: 1
-            }]
-          },
-          options: {
-            scales: {
-              y: {
-                beginAtZero: true
-              }
+        const chartOpt = document.querySelectorAll('.chart .options .user li');
+
+
+        chartOpt.forEach(li => {
+            li.onclick = () => {
+                if (li.id == 'user') {
+                }
             }
-          }
         });
-      </script>
+
+    </x-splade-script> --}}
+    {{-- <chart /> --}}
+    {{-- {!! $chart1->renderJs() !!} --}}
 
 </x-admin.layout>
