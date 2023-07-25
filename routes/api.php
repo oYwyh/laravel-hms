@@ -1,6 +1,8 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +16,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::get('/chart', function (Request $request) {
+    $users = DB::table('users')->get();
+    $admins = DB::table('admins')->get();
+    $doctors = DB::table('doctors')->get();
+    $datas = User::select(DB::raw("COUNT(*) as count"), DB::raw("DAYNAME(created_at) as day_name"))
+                ->whereYear('created_at', date('Y'))
+                ->groupBy(DB::raw("day_name"))
+                ->orderBy('created_at')
+                ->pluck('count', 'day_name');
+
+    $labels = $datas->keys()->toArray();
+    $data = $datas->values()->toArray();
+    return compact('labels', 'data');
 });

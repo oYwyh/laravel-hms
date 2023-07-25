@@ -23,7 +23,9 @@
         "vue-chartjs": "^5.2.0"
     },
     "dependencies": {
+        "@types/jquery": "^3.5.16",
         "chart.js": "^4.3.0",
+        "jquery": "^3.7.0",
         "postscribe": "^2.0.8",
         "vue-session": "^1.0.0"
     }

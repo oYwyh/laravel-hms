@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Admin;
 use App\Tables\Users;
@@ -9,13 +10,15 @@ use App\Models\Doctor;
 use App\Tables\Admins;
 use App\Tables\Doctors;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use LaravelDaily\LaravelCharts\Classes\LaravelChart;
 use ProtoneMedia\Splade\Facades\Toast;
+use Illuminate\Support\Facades\Validator;
+use LaravelDaily\LaravelCharts\Classes\LaravelChart;
+use ProtoneMedia\Splade\FileUploads\HandleSpladeFileUploads;
 
 class AdminController extends Controller
 {
@@ -47,26 +50,20 @@ class AdminController extends Controller
         $users = DB::table('users')->get();
         $admins = DB::table('admins')->get();
         $doctors = DB::table('doctors')->get();
-        // $datas = User::select(DB::raw("COUNT(*) as count"), DB::raw("DAYNAME(created_at) as day_name"))
-        //             ->whereYear('created_at', date('Y'))
-        //             ->groupBy(DB::raw("day_name"))
-        //             ->orderBy('created_at')
-        //             ->pluck('count', 'day_name');
+        $datas = User::select(DB::raw("COUNT(*) as count"), DB::raw("DAYNAME(created_at) as day_name"))
+                    ->whereYear('created_at', date('Y'))
+                    ->groupBy(DB::raw("day_name"))
+                    ->orderBy('created_at')
+                    ->pluck('count', 'day_name');
 
-        // $labels = $datas->keys()->toArray();
-        // $data = $datas->values()->toArray();
-        // return view('dashboard.admin.home', compact('users','admins','doctors','labels', 'data'));
-        $chart_options = [
-            'chart_title' => 'Users by months',
-            'report_type' => 'group_by_date',
-            'model' => 'App\Models\User',
-            'group_by_field' => 'created_at',
-            'group_by_period' => 'month',
-            'chart_type' => 'bar',
-        ];
-        $chart1 = new LaravelChart($chart_options);
+        $labels = $datas->keys()->toArray();
+        $data = $datas->values()->toArray();
 
-        return view('dashboard.admin.home', compact('users','admins','doctors','chart1'));
+        return view('dashboard.admin.home', compact('users','admins','doctors','labels', 'data'));
+    }
+    public function ajax(Request $req) {
+        dd($req);
+		return response()->json(array('msg' => 'Hello ' . $req));
     }
     public function adminIndex() {
         return view('dashboard.admin.manage.admins.index',[
@@ -246,7 +243,28 @@ class AdminController extends Controller
         return view('dashboard.admin.profile.index',
         [
             'admin'=>Auth::user(),
-        ]
-    );
+        ]);
+    }
+    public function update(Request $req) {
+        HandleSpladeFileUploads::forRequest($req, 'image');
+        $formField = $req->validate(
+            [
+                'name' => 'required',
+                'email' => 'required|email|unique:admins,email',
+                'phone' => 'required',
+                'password' => 'required',
+                'image'=> 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            ]
+        );
+
+        $admin = Admin::find(Auth::user()->id);
+        if($req->file('image')) {
+            $admin->image = $req->file('image')->store('images','public');
+        }
+        $admin->update($formField);
+
+        Toast::title('Profile Updated Successfuly!')
+        ->autoDismiss(5);
+        return redirect()->back();
     }
 }

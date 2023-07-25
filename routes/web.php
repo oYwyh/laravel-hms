@@ -33,8 +33,8 @@ Route::middleware(['splade'])->group(function () {
     Route::spladeUploads();
     Route::prefix('user')->name('user.')->group(function(){
         Route::middleware(['guest:web','PreventBackHistory'])->group(function(){
-                Route::view('/login','dashboard.user.login')->name('login');
-                Route::view('/register','dashboard.user.register')->name('register');
+                Route::view('/login','dashboard.user.auth.login')->name('login');
+                Route::view('/register','dashboard.user.auth.register')->name('register');
                 Route::post('/create',[UserController::class,'create'])->name('create');
                 Route::post('/check',[UserController::class,'check'])->name('check');
         });
@@ -43,6 +43,19 @@ Route::middleware(['splade'])->group(function () {
                 Route::view('/home','dashboard.user.home')->name('home');
                 Route::post('/logout',[UserController::class,'logout'])->name('logout');
                 // Route::get('/add-new',[UserController::class,'add'])->name('add');
+                Route::prefix('profile')->name('profile.')->group(function() {
+                    Route::get('/',[UserController::class,'profile'])->name('index');
+                    Route::post('/update',[UserController::class,'update'])->name('update');
+                });
+                Route::prefix('manage')->name('manage.')->group(function() {
+                    Route::prefix('appointments')->name('appointments.')->group(function() {
+                        Route::get('/',[UserController::class,'appointments'])->name('index');
+                        Route::get('/edit',[UserController::class,'edit'])->name('edit');
+                        Route::post('/delete',[UserController::class,'delete'])->name('delete');
+                        Route::get('/book',[UserController::class,'book'])->name('book');
+                        Route::post('/create',[UserController::class,'createAppointment'])->name('create');
+                    });
+                });
         });
     });
 
@@ -85,6 +98,7 @@ Route::middleware(['splade'])->group(function () {
             });
             Route::prefix('profile')->name('profile.')->group(function() {
                 Route::get('/',[AdminController::class,'profile'])->name('index');
+                Route::post('/update',[AdminController::class,'update'])->name('update');
             });
             // Route::post('/profile',[AdminController::class,'profile'])->name('logout');
         });

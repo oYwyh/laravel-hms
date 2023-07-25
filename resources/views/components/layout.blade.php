@@ -1,4 +1,4 @@
-{{-- <div class="min-h-screen bg-gray-100">
+<div class="min-h-screen bg-gray-100">
     <x-navigation />
 
     <!-- Page Heading -->
@@ -16,4 +16,4 @@
     <main>
         {{ $slot }}
     </main>
-</div> --}}
+</div>

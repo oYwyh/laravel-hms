@@ -3,7 +3,7 @@
         <div class="box">
             <div class="title">Overview</div>
             <x-splade-form :action="route('admin.manage.admins.index')">
-                <x-splade-input id="date" name="time" placeholder="Time" date />
+                <x-splade-input id="date" name="time" placeholder="Time" date/>
             </x-splade-form>
         </div>
         <div class="overview">
@@ -29,44 +29,32 @@
                 </div>
             </div>
         </div>
-        {{-- <div class="chart">
-            <div class="options">
+        <div class="chart">
+            {{-- <div class="options">
                 <ul class="user">
                     <li id="user">Users</li>
                     <li id="admin">Admins</li>
                     <li id="doctor">Doctors</li>
                     <li id="appointment">Appointment</li>
                 </ul>
-                <ul class="lol">
-                    <li>lol</li>
-                </ul>
-            </div>
-            <div class="row">
-                <ul class="type">
-                    <li>Bar</li>
-                    <li>Line</li>
-                    <li>pie</li>
-                </ul>
+            </div> --}}
                 <chart label="{{implode(',',$labels)}}" datas="{{implode(',',$data)}}"/>
-            </div>
-        </div> --}}
-        <h1>{{ $chart1->options['chart_title'] }}</h1>
-        {!! $chart1->renderHtml() !!}
+        </div>
     </x-admin.content>
-    {{-- <x-splade-script>
+    <x-splade-script>
 
-        const chartOpt = document.querySelectorAll('.chart .options .user li');
+        {{-- window.onload = () => {
+                ajax({
+                    type: 'GET',
+                    data: {
+                        fullName: 'lol'
+                    },
+                    url: "{{url('/admin/ajax')}}",
+                    success: function(data) {
+                        document.querySelector('#result').html(data.msg);
+                    }
+                });
+        } --}}
 
-
-        chartOpt.forEach(li => {
-            li.onclick = () => {
-                if (li.id == 'user') {
-                }
-            }
-        });
-
-    </x-splade-script> --}}
-    {{-- <chart /> --}}
-    {{-- {!! $chart1->renderJs() !!} --}}
-
+    </x-splade-script>
 </x-admin.layout>

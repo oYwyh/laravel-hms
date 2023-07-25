@@ -57,15 +57,15 @@ Link {
                 position: relative;
                 display: inline-block;
                 .profile-pic {
-                    @include rounded;
+                    border-radius: 8px;
                     cursor: pointer;
                     max-width: fit-content;
                     border: 2px solid $primary;
-                    padding: 2px;
+                    padding: 1px;
                     img {
-                        @include rounded;
+                        border-radius: 8px;
                         max-width: 100%;
-                        width: 50px;
+                        width: 70px;
                     }
                 }
                 .dropdown-content {
@@ -258,27 +258,42 @@ Link {
         .profile {
             @include column;
             gap: 0rem;
-            width: 100%;
-            .box {
-                @include row;
+            position: relative;
+            .wrapper {
+                @include column;
                 align-items: flex-start;
                 justify-content: flex-start;
                 padding: 1rem;
+                gap: 2rem;
                 width: 100%;
-                gap: 3rem;
+                > div {
+                    width: 100%;
+                }
                 .box {
-                    @include rounded;
-                    width: fit-content !important;
-                    border: 2px solid $primary;
-                    padding: 2px;
+                    @include column;
+                    align-items: flex-start;
+                    justify-content: flex-start;
+                    text-align: center;
+                    gap: 1rem;
+                    .img-box {
+                        border-radius: 8px;
+                        width: fit-content !important;
+                        border: 2px solid $primary;
+                        padding: 1px;
+                    }
                     img {
-                        @include rounded;
+                        border-radius: 8px;
                         max-width: 100%;
                         width: 100px;
                     }
                 }
-                #info {
-                    width: 100%;
+                .info {
+                    @include row;
+                    gap: 1rem;
+                    .column {
+                        @include column;
+                        width: 100% !important;
+                    }
                     .group {
                         @include row;
                         gap: 3rem;
@@ -291,16 +306,20 @@ Link {
                         }
                     }
                 }
+                .edit {
+                    background-color: $primary;
+                    border-radius:5px;
+                    width: 100%;
+                    text-align: center;
+                    padding: 2px;
+                    color: white;
+                }
             }
         }
         .chart {
-            width: 500px;
-            display: flex;
             @include column;
-            align-items: flex-end;
+            width: 800px;
             .options {
-                display: flex;
-                justify-content: flex-end;
                 ul.user {
                     @include row;
                     li {
@@ -312,43 +331,17 @@ Link {
                         border-top-right-radius: 8PX;
                     }
                 }
-                ul.lol {
-                    opacity: 0;
-                    z-index: -100;
-                    li {
-                        font-size:14px ;
-                        background-color: $border;
-                        padding: 2px 8px;
-                        cursor: pointer;
-                        border-top-right-radius: 8PX;
-                        border-bottom-right-radius: 8PX;
-                    }
-                }
             }
             .row {
                 display: flex;
                 flex-direction: row-reverse;
                 align-items: center;
-                ul.type{
-                    @include column;
-                    gap: 0.5rem;
-                    li {
-                        font-size:14px ;
-                        background-color: $border;
-                        padding: 2px 8px;
-                        cursor: pointer;
-                        border-top-right-radius: 8PX;
-                        border-bottom-right-radius: 8PX;
-                    }
-                }
                 canvas {
                     border: 2px solid $border;
-                    width: 500px;
                     border-radius: 8px;
                     border-top-right-radius: 0px;
                 }
             }
         }
     }
-
 }

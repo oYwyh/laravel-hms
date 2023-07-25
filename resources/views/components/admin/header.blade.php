@@ -11,7 +11,7 @@
                         <div id="dropdown-bell-content" class="dropdown-content">
                                 <div class="box">
                                     <div class="img">
-                                        <img src="{{asset('images/doc.jpg')}}" alt="">
+                                        <img src="{{Auth::user()->image ? asset('storage/'.Auth::user()->image) : asset('images/doc.jpg')}}" alt="">
                                     </div>
                                     <div class="msg">
                                         ez
@@ -20,7 +20,7 @@
                                 <div class="divider-primary"></div>
                                 <div class="box">
                                     <div class="img">
-                                        <img src="{{asset('images/doc.jpg')}}" alt="">
+                                        <img src="{{Auth::user()->image ? asset('storage/'.Auth::user()->image) : asset('images/doc.jpg')}}" alt="">
                                     </div>
                                     <div class="msg">
                                         ez
@@ -29,7 +29,7 @@
                                 <div class="divider-primary"></div>
                                 <div class="box">
                                     <div class="img">
-                                        <img src="{{asset('images/doc.jpg')}}" alt="">
+                                        <img src="{{Auth::user()->image ? asset('storage/'.Auth::user()->image) : asset('images/doc.jpg')}}" alt="">
                                     </div>
                                     <div class="msg">
                                         ez
@@ -38,7 +38,7 @@
                                 <div class="divider-primary"></div>
                                 <div class="box">
                                     <div class="img">
-                                        <img src="{{asset('images/doc.jpg')}}" alt="">
+                                        <img src="{{Auth::user()->image ? asset('storage/'.Auth::user()->image) : asset('images/doc.jpg')}}" alt="">
                                     </div>
                                     <div class="msg">
                                         ez
@@ -53,11 +53,11 @@
             <div class="dropdown">
                 <x-splade-toggle>
                     <div class="profile-pic" @click.prevent="toggle" id="droppbtn">
-                        <img src="{{asset('images/doc.jpg')}}" alt="">
+                        <img src="{{Auth::user()->image ? asset('storage/'.Auth::user()->image) : asset('images/doc.jpg')}}" alt="">
                     </div>
                     <x-splade-transition show="toggled">
                         <div id="dropdown-profile-content" class="dropdown-content">
-                            <x-splade-form id="form" :action="Route('admin.profile.index')">
+                            <x-splade-form id="form" method="GET" :action="Route('admin.profile.index')">
                                 <x-splade-submit style="background: none; color:black !important; border:none !important;">{{Auth::guard('admin')->user()->name}}</x-splade-submit>
                             </x-splade-form>
                             <x-splade-form

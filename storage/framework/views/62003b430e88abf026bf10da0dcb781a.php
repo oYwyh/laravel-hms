@@ -27,7 +27,7 @@
                         <div id="dropdown-bell-content" class="dropdown-content">
                                 <div class="box">
                                     <div class="img">
-                                        <img src="<?php echo e(asset('images/doc.jpg')); ?>" alt="">
+                                        <img src="<?php echo e(Auth::user()->image ? asset('storage/'.Auth::user()->image) : asset('images/doc.jpg')); ?>" alt="">
                                     </div>
                                     <div class="msg">
                                         ez
@@ -36,7 +36,7 @@
                                 <div class="divider-primary"></div>
                                 <div class="box">
                                     <div class="img">
-                                        <img src="<?php echo e(asset('images/doc.jpg')); ?>" alt="">
+                                        <img src="<?php echo e(Auth::user()->image ? asset('storage/'.Auth::user()->image) : asset('images/doc.jpg')); ?>" alt="">
                                     </div>
                                     <div class="msg">
                                         ez
@@ -45,7 +45,7 @@
                                 <div class="divider-primary"></div>
                                 <div class="box">
                                     <div class="img">
-                                        <img src="<?php echo e(asset('images/doc.jpg')); ?>" alt="">
+                                        <img src="<?php echo e(Auth::user()->image ? asset('storage/'.Auth::user()->image) : asset('images/doc.jpg')); ?>" alt="">
                                     </div>
                                     <div class="msg">
                                         ez
@@ -54,7 +54,7 @@
                                 <div class="divider-primary"></div>
                                 <div class="box">
                                     <div class="img">
-                                        <img src="<?php echo e(asset('images/doc.jpg')); ?>" alt="">
+                                        <img src="<?php echo e(Auth::user()->image ? asset('storage/'.Auth::user()->image) : asset('images/doc.jpg')); ?>" alt="">
                                     </div>
                                     <div class="msg">
                                         ez
@@ -87,7 +87,7 @@
 <?php endif; ?>
 <?php $component->withAttributes([]); ?>
                     <div class="profile-pic" @click.prevent="toggle" id="droppbtn">
-                        <img src="<?php echo e(asset('images/doc.jpg')); ?>" alt="">
+                        <img src="<?php echo e(Auth::user()->image ? asset('storage/'.Auth::user()->image) : asset('images/doc.jpg')); ?>" alt="">
                     </div>
                     <?php if (isset($component)) { $__componentOriginal9c1b3bcdbb92880d08ba057cf26c9bd2 = $component; } ?>
 <?php $component = ProtoneMedia\Splade\Components\Transition::resolve(['show' => 'toggled'] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
@@ -107,7 +107,7 @@
 <?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag && $constructor = (new ReflectionClass(ProtoneMedia\Splade\Components\Form::class))->getConstructor()): ?>
 <?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
 <?php endif; ?>
-<?php $component->withAttributes(['id' => 'form','action' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute(Route('admin.profile.index'))]); ?>
+<?php $component->withAttributes(['id' => 'form','method' => 'GET','action' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute(Route('admin.profile.index'))]); ?>
                                 <?php if (isset($component)) { $__componentOriginal2d975ce603f483bebe2dbee59a477e99 = $component; } ?>
 <?php $component = ProtoneMedia\Splade\Components\Form\Submit::resolve([] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
 <?php $component->withName('splade-submit'); ?>
