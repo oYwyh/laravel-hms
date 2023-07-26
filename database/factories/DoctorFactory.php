@@ -22,7 +22,7 @@ class DoctorFactory extends Factory
             'email' => fake()->unique()->safeEmail(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'specialty' => fake()->randomElement(['surgery','Family medicine']),
-            'time' => '2023-07-24-18:00:00,2023-07-30-18:00:00',
+            'time' => '2023-07-24_18:00:00,2023-07-30_18:00:00',
             'image' => asset('/images/doc.jpg'),
             'email_verified_at' => now(),
             'remember_token' => Str::random(10),

@@ -54,6 +54,12 @@
                     </div>
                 </div>
             </div>
+            <div class="clender-box">
+                <clender id="clender" doctor="{{implode(',',$doctor)}}" date="{{implode(',',$date)}}"/>
+            </div>
         </div>
     </x-user.content>
+    <x-splade-script>
+
+    </x-splade-script>
 </x-user.layout>

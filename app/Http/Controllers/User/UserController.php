@@ -21,8 +21,17 @@ use ProtoneMedia\Splade\FileUploads\HandleSpladeFileUploads;
 class UserController extends Controller
 {
     public function index() {
+        $db = Appointment::where('patient_id',Auth::user()->id)->get();
+        $appDoc = [];
+        $appDate = [];
+        foreach ($db as $appointment) {
+            $appDoc[] = $appointment->doctor_id;
+            $appDate[] = $appointment->date;
+        }
         return view('dashboard.user.home', [
             'user'=>Auth::user(),
+            'doctor'=>$appDoc,
+            'date'=>$appDate,
         ]);
     }
     public function create(Request $req) {

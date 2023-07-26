@@ -4,6 +4,7 @@ import "../sass/app.scss";
 import Chart from './components/Chart.vue';
 import "@protonemedia/laravel-splade/dist/style.css";
 import Time from './components/Axios.vue';
+import Clender from './components/Clender.vue';
 import { createApp } from "vue/dist/vue.esm-bundler.js";
 import { renderSpladeApp, SpladePlugin } from "@protonemedia/laravel-splade";
 
@@ -19,4 +20,5 @@ createApp({
     })
     .component('chart',Chart)
     .component('timeCo',Time)
+    .component('clender',Clender)
     .mount(el);

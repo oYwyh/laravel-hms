@@ -187,7 +187,6 @@ Link {
         width: 100%;
         .profile-box {
             @include row;
-            margin-top: 1rem;
             gap: 1rem;
             border-radius: 15px;
             background-color: #f5f5f5;
@@ -405,6 +404,63 @@ Link {
                     border: 2px solid $border;
                     border-radius: 8px;
                     border-top-right-radius: 0px;
+                }
+            }
+        }
+        .clender-box {
+            @include column;
+            gap: 2rem;
+            width: 100%;
+            .title {
+                font-size: 30px;
+                margin: 0;
+                padding: 0;
+            }
+            #clender {
+                width: 100%;
+                height: 50vh !important;
+                .fc-event {
+                    @include column;
+                    gap: 0;
+                    margin: 6px 2px 0 2px;
+                    border: none;
+                    border-top: 5px solid $primary ;
+                    border-radius: 10px;
+                    border-top-right-radius: 10px;
+                    border-top-left-radius: 10px;
+                    background-color: #eefcff;
+                    color: black !important;
+                    height: calc(100% - 10px);
+                    box-shadow: #0080ff53 0px 5px 20px 0px;
+                    padding: 5px;
+                }
+                .fc-event-title,
+                .fc-event-time {
+                    color: black;
+                }
+                .fc-event-title {
+                    order: 1;
+                    font-size: 16px;
+                    font-weight: bold;
+                }
+                .fc-event-time {
+                    order: 2;
+                    font-size: 18px;
+                }
+                .fc-timegrid-slot {
+                    height: 50px;
+                }
+                .fc-day-today {
+                    background-color: #3481ce3d;
+                }
+                .fc-daygrid-day-events {
+                    display: none;
+                }
+                .fc-timegrid-axis-cushion {
+                    display: none;
+                }
+                .fc-timegrid-divider {
+                    display: none;
                 }
             }
         }
