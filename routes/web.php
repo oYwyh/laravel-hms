@@ -17,8 +17,6 @@ use App\Http\Controllers\Doctor\DoctorController;
 */
 
 Route::middleware(['splade'])->group(function () {
-    Route::get('/welcome', fn () => view('home'))->name('home');
-    Route::get('/docs', fn () => view('docs'))->name('docs');
 
     // Registers routes to support the interactive components...
     Route::spladeWithVueBridge();
@@ -40,7 +38,7 @@ Route::middleware(['splade'])->group(function () {
         });
 
         Route::middleware(['auth:web','PreventBackHistory'])->group(function(){
-                Route::view('/home','dashboard.user.home')->name('home');
+                Route::get('/home',[UserController::class,'index'])->name('home');
                 Route::post('/logout',[UserController::class,'logout'])->name('logout');
                 // Route::get('/add-new',[UserController::class,'add'])->name('add');
                 Route::prefix('profile')->name('profile.')->group(function() {
@@ -52,8 +50,13 @@ Route::middleware(['splade'])->group(function () {
                         Route::get('/',[UserController::class,'appointments'])->name('index');
                         Route::get('/edit',[UserController::class,'edit'])->name('edit');
                         Route::post('/delete',[UserController::class,'delete'])->name('delete');
+                        Route::get('/timeChecker',[UserController::class,'timeChecker'])->name('timeChecker');
+                        Route::get('/specialty',[UserController::class,'specialty'])->name('specialty');
                         Route::get('/book',[UserController::class,'book'])->name('book');
                         Route::post('/create',[UserController::class,'createAppointment'])->name('create');
+                        Route::post('/getTime',[UserController::class,'getTime'])->name('getTime');
+                        Route::post('/getSpec',[UserController::class,'getSpec'])->name('getSpec');
+                        Route::post('/createAppointment',[UserController::class,'createAppointment'])->name('createAppointment');
                     });
                 });
         });

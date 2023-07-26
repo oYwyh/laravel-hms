@@ -1,24 +1,22 @@
 <x-user.layout>
+    @php
+    $time = explode(',',Session::get('doc')->time)
+    @endphp
+
     <x-user.content>
         <div class="title">Book Appointment</div>
-            <x-splade-form :action="Route('user.manage.appointments.create')" method="POST" autocomplete="off">
-
+            <x-splade-form :action="Route('user.manage.appointments.createAppointment')" method="POST" autocomplete="off">
                 <div class="form-group mt-2">
-                        <x-splade-select name="doctor" id="doctor-select" label="Doctor" :options="$doctors_names"  />
-                    </div>
-                {{-- <div class="form-group mt-2">
-                    <x-splade-input date name="date" label="Appointment Date" />
-                </div> --}}
-                <div class="form-group">
-                    <x-splade-submit class="mt-4" label="Book" confirm/>
+                    <x-splade-input type="text" label="Name" name="name" placeholder="{{Session::get('doc')->name}}" disabled />
                 </div>
+                <div class="form-group mt-2">
+                    <x-splade-group name="date" label="Avalible Date">
+                        @foreach($time as $item)
+                            <x-splade-radio name="date" value="{{$item}}" label="{{$item}}" />
+                        @endforeach
+                    </x-splade-group>
+                </div>
+                <x-splade-submit label="Book Appointment" class="mt-4" style="width: 100%;" />
             </x-splade-form>
     </x-user.content>
-    <x-splade-script>
-        const doctorSelect = document.querySelector('#doctor-select');
-
-        doctorSelect.addEventListener('input',(e) => {
-            console.log(doctorSelect.value)
-        })
-    </x-splade-script>
 </x-user.layout>

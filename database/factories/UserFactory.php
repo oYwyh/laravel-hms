@@ -20,7 +20,10 @@ class UserFactory extends Factory
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
+            'image' => asset('/images/doc.jpg'),
             'email_verified_at' => now(),
+            'age' => fake()->numberBetween(18,100),
+            'gender' => fake()->randomElement(['male','female']),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'created_at'=>  now(),
             'remember_token' => Str::random(10),

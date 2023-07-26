@@ -11,6 +11,9 @@ use ProtoneMedia\Splade\Facades\Toast;
 
 class DoctorController extends Controller
 {
+    public function time() {
+        return Doctor::all();
+    }
     public function create(Request $req) {
         $req->validate([
             'name'=>'required',

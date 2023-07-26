@@ -33,6 +33,28 @@
                         </span>
                     </div>
                     <div class="form-group">
+                        <label for="age">Age</label>
+                        <input type="text" class="form-control" name="age" value="{{old('age')}}">
+                        <span class="text-danger">
+                            @error('age')
+                                {{$message}}
+                            @enderror
+                        </span>
+                    </div>
+                    <div class="form-group" style="display: flex;flex-direction: column;">
+                        <label for="gender">Gender</label>
+                        <select name="gender">
+                            <option value="" selected>Select</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                        <span class="text-danger">
+                            @error('gender')
+                                {{$message}}
+                            @enderror
+                        </span>
+                    </div>
+                    <div class="form-group">
                         <label for="password">password</label>
                         <input type="password" class="form-control" name="password" value="{{old('password')}}">
                         <span class="text-danger">

@@ -18,54 +18,56 @@
 <?php $component->withAttributes([]); ?>
         <div class="box">
             <div class="title">Overview</div>
-            <?php if (isset($component)) { $__componentOriginal8070f1a8f8bb4059ff6ff5b9ed074a0a = $component; } ?>
-<?php $component = ProtoneMedia\Splade\Components\Form::resolve([] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
-<?php $component->withName('splade-form'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag && $constructor = (new ReflectionClass(ProtoneMedia\Splade\Components\Form::class))->getConstructor()): ?>
-<?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
-<?php endif; ?>
-<?php $component->withAttributes(['action' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute(route('admin.manage.admins.index'))]); ?>
-                <?php if (isset($component)) { $__componentOriginal690b64017277cbdd89bc2d788db21f28 = $component; } ?>
-<?php $component = ProtoneMedia\Splade\Components\Form\Input::resolve(['name' => 'time','date' => true] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
-<?php $component->withName('splade-input'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag && $constructor = (new ReflectionClass(ProtoneMedia\Splade\Components\Form\Input::class))->getConstructor()): ?>
-<?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
-<?php endif; ?>
-<?php $component->withAttributes(['id' => 'date','placeholder' => 'Time']); ?>
-<?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginal690b64017277cbdd89bc2d788db21f28)): ?>
-<?php $component = $__componentOriginal690b64017277cbdd89bc2d788db21f28; ?>
-<?php unset($__componentOriginal690b64017277cbdd89bc2d788db21f28); ?>
-<?php endif; ?>
-             <?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginal8070f1a8f8bb4059ff6ff5b9ed074a0a)): ?>
-<?php $component = $__componentOriginal8070f1a8f8bb4059ff6ff5b9ed074a0a; ?>
-<?php unset($__componentOriginal8070f1a8f8bb4059ff6ff5b9ed074a0a); ?>
-<?php endif; ?>
+
         </div>
         <div class="overview">
-            <div class="box">
-                <div class="title">Total Patients <i class="fa-solid fa-user"></i></div>
-                <div class="row">
-                    <div class="somthing">off</div>
+            <div class="profile-box">
+                <div class="main">
+                    <div class="row">
+                        <div class="img-box">
+                            <img src="<?php echo e(Auth::user()->image ? asset('storage/'.Auth::user()->image) : asset('images/doc.jpg')); ?>" alt="">
+                        </div>
+                        <div class="column">
+                            <p class="name"><?php echo e($user->name); ?></p>
+                            <p class="age"><?php echo e($user->age); ?> years old</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="column">
+                            <div class="label">Height</div>
+                            <div class="txt"><?php echo e($user->height); ?></div>
+                        </div>
+                        <div class="column">
+                            <div class="label">Weight</div>
+                            <div class="txt"><?php echo e($user->weight); ?></div>
+                        </div>
+                        <div class="column">
+                            <div class="label">Blood Type</div>
+                            <div class="txt"><?php echo e($user->blood); ?></div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="box">
-                <div class="title">Total Doctors <i class="fa-solid fa-user-doctor"></i></div>
-                <div class="row">
-                    <div class="somthing">off</div>
-                </div>
-            </div>
-            <div class="box">
-                <div class="title">Total Admins <i class="fa-solid fa-wrench"></i></div>
-                <div class="row">
-                    <div class="somthing">off</div>
+                <div class="nor-row">
+                    <div class="nor-column">
+                        <p class="label">Phone Number</p>
+                        <p class="txt"><?php echo e($user->phone); ?></p>
+                    </div>
+                    <div class="nor-column">
+                        <p class="label">Email</p>
+                        <p class="txt"><?php echo e($user->email); ?></p>
+                    </div>
+                    <div class="nor-column">
+                        <p class="label">Passport</p>
+                        <p class="txt"><?php echo e($user->passport); ?></p>
+                    </div>
+                    <div class="nor-column">
+                        <p class="label">Card Number</p>
+                        <p class="txt"><?php echo e($user->id); ?></p>
+                    </div>
+                    <div class="nor-column">
+                        <p class="label">Medical Condition</p>
+                        <p class="txt"><?php echo e($user->conditions ? $user->conditions : 'None'); ?></p>
+                    </div>
                 </div>
             </div>
         </div>

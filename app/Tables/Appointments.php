@@ -2,11 +2,14 @@
 
 namespace App\Tables;
 
+use App\Models\Doctor;
 use App\Models\Appointment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use ProtoneMedia\Splade\SpladeTable;
 use ProtoneMedia\Splade\AbstractTable;
 use ProtoneMedia\Splade\Facades\Toast;
+use PhpOffice\PhpSpreadsheet\Worksheet\AutoFilter\Column;
 
 class Appointments extends AbstractTable
 {
@@ -37,7 +40,7 @@ class Appointments extends AbstractTable
      */
     public function for()
     {
-        return Appointment::query();
+        return Appointment::query()->where('patient_id',Auth::user()->id);
     }
 
     /**
@@ -49,13 +52,11 @@ class Appointments extends AbstractTable
     public function configure(SpladeTable $table)
     {
         $table
-        ->withGlobalSearch(columns: ['id','name','hospital','email'])
         ->column('id', sortable: true)
-        ->column('patinet_id', sortable: true)
+        ->column('doctor', sortable: true)
         ->column('doctor_id', sortable: true)
         ->column('date')
         ->column('status')
-        ->column('updated_at', sortable: true)
         ->column('action',exportAs:false)
         ->bulkAction(
             label: 'Touch timestamp',
@@ -69,6 +70,7 @@ class Appointments extends AbstractTable
             before: fn () => info('Remove the selected Appointment'),
             after: fn () => Toast::info('Doctors Removed!')
         )
+        ->withGlobalSearch(columns: ['id','doctor_id','patient_id','date'])
         ->export()
         ->paginate(5);
 
