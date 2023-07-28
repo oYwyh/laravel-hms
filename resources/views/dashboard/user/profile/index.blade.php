@@ -23,7 +23,7 @@
                                             <option value="male">Female</option>
                                         </x-splade-select>
                                         <x-splade-input type="text" disabled  class="input" name="phone" label="Phone Number" />
-                                        <x-splade-input type="text" disabled  class="input" name="passport" label="Passport" />
+                                        <x-splade-input type="text" disabled  class="input" name="national_id" label="id" />
                                     </div>
                                     <div class="group">
                                         <x-splade-input type="text" disabled  class="input" name="height" label="height (cm)" />
@@ -40,7 +40,7 @@
                                         </x-splade-select>
                                     </div>
                                     <div class="group">
-                                        <x-splade-input disabled type="text" class="input" name="disease" label="chronic disease" />
+                                        <x-splade-input type="text" class="input" disabled name="disease" label="chronic disease" />
                                     </div>
                                 </div>
                             </x-splade-form>
@@ -67,7 +67,7 @@
                                             <option value="male">Female</option>
                                         </x-splade-select>
                                         <x-splade-input type="text" class="input" name="phone" label="Phone Number" />
-                                        <x-splade-input type="text" class="input" name="passport" label="Passport" />
+                                        <x-splade-input type="text" class="input" name="national_id" label="id" />
                                     </div>
                                     <div class="group">
                                         <x-splade-input type="text" class="input" name="height" label="height (cm)" />
@@ -86,6 +86,7 @@
                                     <div class="group">
                                         <x-splade-input type="text" class="input" name="disease" label="chronic disease" />
                                     </div>
+
                                     <x-splade-submit class="mt-4" style="width:100%;" label="update" />
                                 </div>
                             </x-splade-form>

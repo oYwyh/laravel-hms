@@ -34,6 +34,92 @@ class UserController extends Controller
             'date'=>$appDate,
         ]);
     }
+    public function file() {
+        $insurance = [
+            'abo_ali_staff',
+            'al_ahly_bank',
+            'al_ahly_club',
+            'axa_insurance',
+            'commercial_cendicate',
+            'engineering_cendicate',
+            'medical_cenicate',
+            'pharmacy_cendicate',
+            'journalist_cendicate',
+            'enaya_insurance',
+            'egycare',
+            'globe_med',
+            'honor_card',
+            'hyper_one',
+            'mustakbal_watan_party',
+            'nextcare',
+            'smart',
+            'ubf',
+            'we',
+            'zeied_sport_club',
+            'walk_in',
+        ];
+        return view('dashboard.user.medical',[
+            'insurance'=>$insurance,
+        ]);
+    }
+
+    public function investigation(Request $req) {
+        $imgs = array();
+        if($files = $req->file('investigations')) {
+            foreach ($files as $file) {
+                $img_name = md5(rand(1000,10000));
+                $ext = strtolower($file->getClientOriginalExtension());
+                $img_fl_name = $img_name. '.' .$ext;
+                $upload_path = 'storage/images/medical/investigations/users/';
+                $img_url = $upload_path.$img_fl_name;
+                $file->move($upload_path,$img_fl_name);
+                $imgs[] = $img_url;
+            }
+        }
+        $user = User::find(Auth::user()->id);
+        $user->investigations = implode(',',$imgs);
+        $user->update(['investigations' => $user->investigations]);
+        Toast::title('Added Successfuly!')
+        ->autoDismiss(5);
+        return redirect()->back();
+     }
+    public function  insurance(Request $req) {
+        $formField = $req->validate([
+            'insurance' =>'required',
+        ]);
+        $card = array();
+        if($files = $req->file('insurance_card')) {
+            foreach ($files as $file) {
+                $img_name = md5(rand(1000,10000));
+                $ext = strtolower($file->getClientOriginalExtension());
+                $img_fl_name = $img_name. '.' .$ext;
+                $upload_path = 'storage/images/medical/insurance/users/';
+                $img_url = $upload_path.$img_fl_name;
+                $file->move($upload_path,$img_fl_name);
+                $card[] = $img_url;
+            }
+        }
+        $id = array();
+        if($files = $req->file('insurance_id')) {
+            foreach ($files as $file) {
+                $img_name = md5(rand(1000,10000));
+                $ext = strtolower($file->getClientOriginalExtension());
+                $img_fl_name = $img_name. '.' .$ext;
+                $upload_path = 'storage/images/medical/insurance/users/';
+                $img_url = $upload_path.$img_fl_name;
+                $file->move($upload_path,$img_fl_name);
+                $id[] = $img_url;
+            }
+        }
+        $user = User::find(Auth::user()->id);
+        $user->insurance_card =  implode(',',$card);;
+        $user->insurance_id =  implode(',',$id);;
+        $user->insurance = $req->insurance;
+        $user->update($formField);
+        Toast::title('Added Successfuly!')
+        ->autoDismiss(5);
+        return redirect()->back();
+     }
     public function create(Request $req) {
         $req->validate([
             'name'=>'required',
@@ -72,6 +158,8 @@ class UserController extends Controller
         if(Auth::guard('web')->attempt($creds)) {
             Toast::title('Logged In Successfuly!')
             ->autoDismiss(5);
+            Toast::info('You can provide us with more info via profile page!')
+            ->autoDismiss(10);
             return redirect()->route('user.home');
         }else {
             Toast::danger('Invallid Credintiols :(')
@@ -88,8 +176,32 @@ class UserController extends Controller
         return redirect()->route('user.login');
     }
     public function profile() {
+        $insurance = [
+            'abo_ali_staff',
+            'al_ahly_bank',
+            'al_ahly_club',
+            'axa_insurance',
+            'commercial_cendicate',
+            'engineering_cendicate',
+            'medical_cenicate',
+            'pharmacy_cendicate',
+            'journalist_cendicate',
+            'enaya_insurance',
+            'egycare',
+            'globe_med',
+            'honor_card',
+            'hyper_one',
+            'mustakbal_watan_party',
+            'nextcare',
+            'smart',
+            'ubf',
+            'we',
+            'zeied_sport_club',
+            'walk_in',
+        ];
         return view('dashboard.user.profile.index', [
             'user'=>Auth::user(),
+            'insurances'=> $insurance,
         ]);
     }
     public function update(Request $req) {
@@ -97,17 +209,19 @@ class UserController extends Controller
             [
                 'name' => 'required',
                 'email' => 'required|email|unique:users,email',
-                'phone' => 'numeric',
-                'passport' => 'integer',
-                'height' => 'integer',
-                'weight' => 'integer',
+                'password' => 'required',
+                'phone' => 'nullable|numeric',
+                'national_id' => 'nullable|integer',
+                'height' => 'nullable|integer',
+                'weight' => 'nullable|integer',
+                'blood' => 'nullable',
+                'gender' => 'nullable',
             ]
         );
-
         $user = User::find(Auth::user()->id);
         $user->gender = $req->gender;
         $user->phone = $req->phone;
-        $user->passport = $req->passport;
+        $user->national_id = $req->national_id;
         $user->height = $req->height;
         $user->weight = $req->weight;
         $user->blood = $req->blood;
@@ -146,12 +260,18 @@ class UserController extends Controller
         return view('dashboard.user.manage.appointments.book');
     }
     public function getTime(Request $req) {
+        $req->validate([
+            'doctor' => 'required',
+        ]);
         $doc = Doctor::find($req->doctor);
         session()->put('doc',$doc);
         session()->save();
         return redirect()->route('user.manage.appointments.book');
     }
     public function getSpec(Request $req) {
+        $req->validate([
+            'specialty' => 'required',
+        ]);
         $specialty = $req->specialty;
         $doctors = Doctor::where(Str::lower('specialty'),$specialty)->get();
         $names= [];

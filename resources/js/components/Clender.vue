@@ -23,8 +23,9 @@ data() {
         },
         events: [
         ],
-    }
-    }
+    },
+
+}
 },mounted() {
     this.getDoctorsFromDatabase();
 },
@@ -38,19 +39,14 @@ methods: {
                 title: 'operation',
             });
         }
-        // setTimeout(() => {
-        //     this.calendarOptions.events.forEach(lol  => {
-        //         if(lol.title == 'operation') {
-        //                 console.log(document.querySelectorAll('.fc-event'))
-        //                 document.querySelectorAll('.fc-event').forEach(fc => {
-        //                     fc.style.backgroundColor = '#fff5d8'
-        //                     fc.style.borderColor = '#ffc400'
-        //                     fc.style.boxShadow= '#ffc40051 0px 5px 20px 0px'
-        //                 });
-        //         }
-        //     });
-        // }, 500);
     },
+    filter() {
+        const cell = document.querySelectorAll('td');
+        cell.forEach(cell => {
+            if(cell.getAttribute('role') == 'gridcell'){
+            }
+        });
+    }
 }
 }
 

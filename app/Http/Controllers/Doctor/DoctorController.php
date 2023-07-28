@@ -14,11 +14,47 @@ class DoctorController extends Controller
     public function time() {
         return Doctor::all();
     }
+    public function register() {
+        $specialties = [
+            'Family Medicine',
+            'General Surgery',
+            'Vascular Surgery',
+            'Pediatric Surgery',
+            'Neuro Surgery',
+            'Cardio-thoracic Surgery',
+            'Orthopedic Surgery',
+            'Plastic Surgery',
+            'Onco-surgery',
+            'Urology',
+            'Nephrology',
+            'Medicine',
+            'Gastroentrology',
+            'ENT',
+            'Ophalmology',
+            'Ob & Gy',
+            'Endocrinology',
+            'Neurology',
+            'Pediatrics',
+            'Psychiatry',
+            'Dermatology',
+            'Physio-therapy',
+            'Oncology',
+            'Immunology & Rheummatology',
+            'Cardiology',
+            'Geriatrics',
+            'Hematology',
+            'Pain Management',
+            'Pulonology',
+            'Maxill-fascial Surgery',
+        ];
+        return view('dashboard.doctor.auth.register',compact('specialties'));
+    }
     public function create(Request $req) {
         $req->validate([
             'name'=>'required',
             'email'=>'required|email|unique:doctors,email',
-            'hospital'=>'required',
+            'phone'=>'required|numeric|unique:doctors,phone',
+            'specialty'=>'required',
             'password'=>'required|min:5|max:30',
             'cpassword'=>'required|min:5|max:30|same:password',
         ]);
@@ -26,7 +62,8 @@ class DoctorController extends Controller
         $doctor = new Doctor();
         $doctor->name = $req->name;
         $doctor->email = $req->email;
-        $doctor->hospital = $req->hospital;
+        $doctor->specialty = $req->specialty;
+        $doctor->phone = $req->phone;
         $doctor->password = Hash::make($req->password);
         $save = $doctor->save();
 

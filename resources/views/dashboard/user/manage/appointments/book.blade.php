@@ -16,6 +16,7 @@
                         @endforeach
                     </x-splade-group>
                 </div>
+                <p class="note mt-4 text-red-500">Note: You can provide us with your investigations & insurance via files section</p>
                 <x-splade-submit label="Book Appointment" class="mt-4" style="width: 100%;" />
             </x-splade-form>
     </x-user.content>

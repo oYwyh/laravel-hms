@@ -49,10 +49,9 @@ class Doctors extends AbstractTable
     public function configure(SpladeTable $table)
     {
         $table
-            ->withGlobalSearch(columns: ['id','name','hospital','email'])
+            ->withGlobalSearch(columns: ['id','name','email'])
             ->column('id', sortable: true)
             ->column('name', canBeHidden:false , sortable: true)
-            ->column('hospital', sortable: false)
             ->column('email', sortable: false)
             ->column('updated_at')
             ->column('action',exportAs:false)

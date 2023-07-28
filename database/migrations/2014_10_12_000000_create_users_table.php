@@ -22,7 +22,11 @@ return new class extends Migration
             $table->integer('height')->nullable();
             $table->integer('weight')->nullable();
             $table->string('phone')->nullable();
-            $table->integer('passport')->nullable();
+            $table->integer('national_id')->nullable();
+            $table->string('investigations')->nullable();
+            $table->string('insurance')->nullable();
+            $table->string('insurance_card')->nullable();
+            $table->string('insurance_id')->nullable();
             $table->string('image')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

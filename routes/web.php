@@ -40,6 +40,9 @@ Route::middleware(['splade'])->group(function () {
         Route::middleware(['auth:web','PreventBackHistory'])->group(function(){
                 Route::get('/home',[UserController::class,'index'])->name('home');
                 Route::post('/logout',[UserController::class,'logout'])->name('logout');
+                Route::get('/file',[UserController::class,'file'])->name('file');
+                Route::post('/investigation',[UserController::class,'investigation'])->name('investigation');
+                Route::post('/insurance',[UserController::class,'insurance'])->name('insurance');
                 // Route::get('/add-new',[UserController::class,'add'])->name('add');
                 Route::prefix('profile')->name('profile.')->group(function() {
                     Route::get('/',[UserController::class,'profile'])->name('index');
@@ -109,8 +112,9 @@ Route::middleware(['splade'])->group(function () {
 
     Route::prefix('doctor')->name('doctor.')->group(function(){
         Route::middleware(['guest:doctor','PreventBackHistory'])->group(function(){
-            Route::view('/login','dashboard.doctor.login')->name('login');
-            Route::view('/register','dashboard.doctor.register')->name('register');
+            Route::view('/login','dashboard.doctor.auth.login')->name('login');
+            // Route::view('/register','dashboard.doctor.auth.register')->name('register');
+            Route::get('/register',[DoctorController::class,'register'])->name('register');
             Route::post('/create',[DoctorController::class,'create'])->name('create');
             Route::post('/check',[DoctorController::class,'check'])->name('check');
         });
