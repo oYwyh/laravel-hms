@@ -19,6 +19,66 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
+.form-check {
+    display: none;
+    &.active {
+        display: block;
+    }
+}
+
+.row-group {
+    width: 100%;
+    @include row;
+    gap: 2rem;
+    .input {
+        width: 100%;
+    }
+}
+.column-group {
+    @include column;
+    width: 100%;
+    margin-top: 1rem    ;
+    .row {
+        @include row;
+        gap: 1rem;
+        align-items: center;
+    }
+    .img-box {
+        margin-top: 0.5rem;
+        border: 2px solid $primary;
+        padding: 1px;
+        width: fit-content !important;
+        height: fit-content;
+        border-radius: 8px;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        cursor: pointer;
+        img {
+            border-radius: 8px;
+            max-width: 100%;
+            width: 200px;
+
+        }
+    }
+}
+.toggle {
+    ul {
+        @include row;
+        gap: 1rem;
+        justify-content: center;
+        li {
+            background-color: $primary;
+            border-radius: 8px;
+            padding: 0.2rem 0.5rem;
+            color: white;
+            transition: $transition;
+            cursor: pointer;
+            &:hover {
+                background-color: #3279c0
+            }
+        }
+    }
+}
+
 Link {
     text-decoration: none;
 }
@@ -31,7 +91,18 @@ Link {
     border: 1px solid $border;
     margin-top: 1rem;
 }
-
+button {
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.16, rgb(207, 207, 207)), color-stop(0.79, rgb(252, 252, 252)));
+    background-image: -moz-linear-gradient(center bottom, rgb(207, 207, 207) 16%, rgb(252, 252, 252) 79%);
+    background-image: linear-gradient(to top, rgb(207, 207, 207) 16%, rgb(252, 252, 252) 79%);
+    padding: 3px;
+    border: 1px solid #000;
+    color: black;
+    text-decoration: none;
+}
 // Start Header
 .header {
 
@@ -191,25 +262,7 @@ Link {
                 text-align: center;
                 font-size: 30px
             }
-            .toggle {
-                ul {
-                    @include row;
-                    gap: 1rem;
-                    justify-content: center;
-                    margin: 1rem 0;
-                    li {
-                        background-color: $primary;
-                        border-radius: 8px;
-                        padding: 0.2rem 0.5rem;
-                        color: white;
-                        transition: $transition;
-                        cursor: pointer;
-                        &:hover {
-                            background-color: #3279c0
-                        }
-                    }
-                }
-            }
+
             .box {
                 @include column;
                 width: 100%;
@@ -455,8 +508,11 @@ Link {
                     }
                     .group {
                         @include row;
-                        gap: 3rem;
-                        margin-top: 2rem;
+                        gap: 2rem;
+                        margin-top: 1rem;
+                        > div {
+                            width: 100%;
+                        }
                         &:nth-child(1) {
                             margin: 0;
                         }
@@ -548,16 +604,29 @@ Link {
                 .fc-day-today {
                     background-color: #3481ce3d;
                 }
-                .fc-daygrid-day-events {
-                    display: none;
-                }
-                .fc-timegrid-axis-cushion {
-                    display: none;
-                }
-                .fc-timegrid-divider {
-                    display: none;
-                }
+
+            }
+        }
+        .presc {
+            @include row;
+            gap: 2rem;
+            margin-top: 2rem;
+            .prescription {
+                border: 1px solid black;
+                padding: 1rem;
+                width: 100%;
+            }
+            .editor {
+                width: 100%;
             }
         }
     }
 }
+.group-check {
+    display: none;
+}
+.group-check.active {
+    display: block;
+}
+
+

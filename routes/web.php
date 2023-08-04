@@ -121,6 +121,19 @@ Route::middleware(['splade'])->group(function () {
         Route::middleware(['auth:doctor','PreventBackHistory'])->group(function(){
             Route::view('/home','dashboard.doctor.home')->name('home');
             Route::post('logout',[DoctorController::class,'logout'])->name('logout');
+            Route::prefix('profile')->name('profile.')->group(function() {
+                Route::get('/',[DoctorController::class,'profile'])->name('index');
+                Route::post('/update',[DoctorController::class,'update'])->name('update');
+            });
+            Route::prefix('manage')->name('manage.')->group(function() {
+                Route::prefix('appointments')->name('appointments.')->group(function() {
+                    Route::get('/',[DoctorController::class,'appointments'])->name('index');
+                    Route::get('/info',[DoctorController::class,'info'])->name('info');
+                    Route::post('/saveinfo',[DoctorController::class,'saveInfo'])->name('saveInfo');
+                    Route::get('/prescription',[DoctorController::class,'prescription'])->name('prescription');
+                    Route::post('/cancle',[DoctorController::class,'cancle'])->name('cancle');
+                });
+            });
         });
     });
 });

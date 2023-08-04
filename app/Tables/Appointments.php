@@ -7,6 +7,7 @@ use App\Models\Appointment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use ProtoneMedia\Splade\SpladeTable;
+use Illuminate\Support\Facades\Route;
 use ProtoneMedia\Splade\AbstractTable;
 use ProtoneMedia\Splade\Facades\Toast;
 use PhpOffice\PhpSpreadsheet\Worksheet\AutoFilter\Column;
@@ -40,7 +41,11 @@ class Appointments extends AbstractTable
      */
     public function for()
     {
-        return Appointment::query()->where('patient_id',Auth::user()->id);
+        if(Route::currentRouteName() == 'user.manage.appointments.index') {
+            return Appointment::query()->where('patient_id',Auth::user()->id);
+        }else {
+            return Appointment::query()->where('doctor_id',Auth::user()->id);
+        }
     }
 
     /**
@@ -51,34 +56,50 @@ class Appointments extends AbstractTable
      */
     public function configure(SpladeTable $table)
     {
-        $table
-        ->column('id', sortable: true)
-        ->column('doctor', sortable: true)
-        ->column('doctor_id', sortable: true)
-        ->column('date')
-        ->column('status')
-        ->column('action',exportAs:false)
-        ->bulkAction(
-            label: 'Touch timestamp',
-            each: fn (Appointment $appointment) => $appointment->touch(),
-            before: fn () => info('Touching the selected Appointment'),
-            after: fn () => Toast::info('Timestamps updated!')
-        )
-        ->bulkAction(
-            label: 'Remove Doctors',
-            each: fn (appointment $appointment) => $appointment->delete(),
-            before: fn () => info('Remove the selected Appointment'),
-            after: fn () => Toast::info('Doctors Removed!')
-        )
-        ->withGlobalSearch(columns: ['id','doctor_id','patient_id','date'])
-        ->export()
-        ->paginate(5);
-
-            // ->searchInput()
-            // ->selectFilter()
-            // ->withGlobalSearch()
-
-            // ->bulkAction()
-            // ->export()
+        if(Route::currentRouteName() == 'user.manage.appointments.index') {
+            $table->column('id', sortable: true)
+            ->column('doctor_id')
+            ->column('doctor')
+            ->column('date')
+            ->column('status')
+            ->column('action',exportAs:false)
+            ->bulkAction(
+                label: 'Touch timestamp',
+                each: fn (Appointment $appointment) => $appointment->touch(),
+                before: fn () => info('Touching the selected Appointment'),
+                after: fn () => Toast::info('Timestamps updated!')
+            )
+            ->bulkAction(
+                label: 'Remove Doctors',
+                each: fn (appointment $appointment) => $appointment->delete(),
+                before: fn () => info('Remove the selected Appointment'),
+                after: fn () => Toast::info('Doctors Removed!')
+            )
+            ->withGlobalSearch(columns: ['id','doctor','date'])
+            ->export()
+            ->paginate(5);
+        }else {
+            $table->column('id', sortable: true)
+            ->column('patient_id')
+            ->column('patient')
+            ->column('date')
+            ->column('status')
+            ->column('action',exportAs:false)
+            ->bulkAction(
+                label: 'Touch timestamp',
+                each: fn (Appointment $appointment) => $appointment->touch(),
+                before: fn () => info('Touching the selected Appointment'),
+                after: fn () => Toast::info('Timestamps updated!')
+            )
+            ->bulkAction(
+                label: 'Remove Doctors',
+                each: fn (appointment $appointment) => $appointment->delete(),
+                before: fn () => info('Remove the selected Appointment'),
+                after: fn () => Toast::info('Doctors Removed!')
+            )
+            ->withGlobalSearch(columns: ['id','patient_id','date'])
+            ->export()
+            ->paginate(5);
+        }
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Doctor;
 use App\Models\Appointment;
@@ -62,7 +63,6 @@ class UserController extends Controller
             'insurance'=>$insurance,
         ]);
     }
-
     public function investigation(Request $req) {
         $imgs = array();
         if($files = $req->file('investigations')) {
@@ -250,14 +250,38 @@ class UserController extends Controller
     public function specialty() {
         $specialties = [
             'surgery',
-            'Family medicine'
+            'family_medicine'
         ];
         return view('dashboard.user.manage.appointments.specialty', [
             'specialties'=> $specialties,
         ]);
     }
     public function book() {
-        return view('dashboard.user.manage.appointments.book');
+        $days = explode('|',Session::get('doc')->days);
+        $hours = explode('|',Session::get('doc')->hours);
+        $count = count($days);
+        $date = [];
+        $lol = [];
+        for ($i = 0; $i < $count; $i++) {
+            $lol[] = Carbon::createFromFormat('l', $days[$i])->format('Y-m-d');
+            $hours_array = explode(',', $hours[$i]);
+            foreach ($hours_array as $hour) {
+                $hour_parts = explode('_', $hour);
+                $temp = explode('_', $hour_parts[0]);
+                $hour_parts[0] = end($temp);
+                $hour_parts = array_filter($hour_parts, function($value) { return!is_string($value) ||!str_contains($value, 'day'); });
+                foreach ($hour_parts as $part) {
+                    if (!isset($date[$lol[count($lol) - 1]])) {
+                        $date[$lol[count($lol) - 1]] = [];
+                    }
+                    if (!in_array($part, $date[$lol[count($lol) - 1]])) {
+                        $date[$lol[count($lol) - 1]][] = $part;
+                    }
+                }
+            }
+        }
+        $carbon = new Carbon();
+        return view('dashboard.user.manage.appointments.book',compact('date','carbon'));
     }
     public function getTime(Request $req) {
         $req->validate([
@@ -292,8 +316,10 @@ class UserController extends Controller
         $appointment = new Appointment();
         $appointment->fill($formField);
         $appointment->patient_id = Auth::user()->id;
+        $appointment->patient = Auth::user()->name;
         $appointment->doctor_id = Session::get('doc')->id;
-        $appointment->status = 'on_progress';
+        $appointment->doctor = Session::get('doc')->name;
+        $appointment->status = 'not_seen';
         $appointment->save();
         Toast::title('Appointment Booked Successfuly!')
         ->autoDismiss(5);

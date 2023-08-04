@@ -23,12 +23,12 @@
                     <div class="title">
                         Investigations
                     </div>
-                        @if($invs[0] != '')
-                            <x-splade-toggle>
-                                <x-splade-transition show="!toggled" style="width:100%">
-                                    <div class="img-box">
-                                        <div class="row">
-                                            @foreach ($invs as $inv)
+                    @if($invs[0] != '')
+                    <x-splade-toggle>
+                        <x-splade-transition show="!toggled" style="width:100%">
+                            <div class="img-box">
+                                <div class="row">
+                                    @foreach ($invs as $inv)
                                                 <img src="{{asset($inv)}}" alt="">
                                             @endforeach
                                         </div>

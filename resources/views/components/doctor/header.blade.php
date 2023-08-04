@@ -57,7 +57,7 @@
                     </div>
                     <x-splade-transition show="toggled">
                         <div id="dropdown-profile-content" class="dropdown-content">
-                            <x-splade-form id="form" method="GET" :action="Route('user.profile.index')">
+                            <x-splade-form id="form" method="GET" :action="Route('doctor.profile.index')">
                                 <x-splade-submit style="background: none; color:black !important; border:none !important;">{{Auth::user()->name}}</x-splade-submit>
                             </x-splade-form>
                             <x-splade-form
@@ -66,7 +66,7 @@
                                 confirm-text="Are you sure you want to logout?"
                                 confirm-button="Yes!"
                                 cancel-button="No, I want to stay!"
-                                :action="Route('user.logout')">
+                                :action="Route('doctor.logout')">
                                 <x-splade-submit style="background: none; color:black !important; border:none !important;" >Logout</x-splade-submit>
                             </x-splade-form>
                         </div>
